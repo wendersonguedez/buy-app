@@ -1,4 +1,4 @@
-import { View, Image, TouchableOpacity, Text } from "react-native";
+import { View, Image, TouchableOpacity, Text, ScrollView } from "react-native";
 
 import { Button } from "@/components/Button";
 import { Input } from "@/components/Input";
@@ -30,11 +30,16 @@ export function Home() {
 					</TouchableOpacity>
 				</View>
 
-				<Item
-					data={{ description: "Café", status: FilterStatus.DONE }}
-					onRemove={() => console.log("oi")}
-					onStatus={() => console.log("status")}
-				/>
+				<ScrollView>
+					{Array.from({ length: 100 }).map((_, index) => (
+						<Item
+							key={index}
+							data={{ description: "Café", status: FilterStatus.DONE }}
+							onRemove={() => console.log("oi")}
+							onStatus={() => console.log("status")}
+						/>
+					))}
+				</ScrollView>
 			</View>
 		</View>
 	);
