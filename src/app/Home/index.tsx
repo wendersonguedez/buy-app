@@ -1,4 +1,4 @@
-import { View, Image, TouchableOpacity, Text, ScrollView } from "react-native";
+import { View, Image, TouchableOpacity, Text, FlatList } from "react-native";
 
 import { Button } from "@/components/Button";
 import { Input } from "@/components/Input";
@@ -9,6 +9,7 @@ import { styles } from "./styles";
 import { FilterStatus } from "@/types/FilterStatus";
 
 const FILTER_STATUS: FilterStatus[] = [FilterStatus.DONE, FilterStatus.PENDING];
+const ITEMS = Array.from({ length: 100 }).map((_, index) => String(index));
 
 export function Home() {
 	return (
@@ -30,16 +31,25 @@ export function Home() {
 					</TouchableOpacity>
 				</View>
 
-				<ScrollView>
-					{Array.from({ length: 100 }).map((_, index) => (
+				{/* 
+					data => o item que será renderizado.
+					keyExtractor => funciona como o 'key', sendo usado para trackear o elemento no momento da renderização.
+					renderItem => componente que será renderizado para cada listagem.
+				*/}
+				<FlatList
+					data={ITEMS}
+					keyExtractor={(item) => item}
+					renderItem={({ item }) => (
 						<Item
-							key={index}
-							data={{ description: "Café", status: FilterStatus.DONE }}
+							data={{
+								description: item,
+								status: FilterStatus.DONE,
+							}}
 							onRemove={() => console.log("oi")}
 							onStatus={() => console.log("status")}
 						/>
-					))}
-				</ScrollView>
+					)}
+				></FlatList>
 			</View>
 		</View>
 	);
