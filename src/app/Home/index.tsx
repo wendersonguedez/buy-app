@@ -9,7 +9,12 @@ import { styles } from "./styles";
 import { FilterStatus } from "@/types/FilterStatus";
 
 const FILTER_STATUS: FilterStatus[] = [FilterStatus.DONE, FilterStatus.PENDING];
-const ITEMS = Array.from({ length: 100 }).map((_, index) => String(index));
+const ITEMS = [
+	{ id: "1", status: FilterStatus.DONE, description: "1 pacote de café" },
+	{ id: "2", status: FilterStatus.PENDING, description: "1 pacote de leite" },
+	{ id: "3", status: FilterStatus.PENDING, description: "1 pacote de bolacha" },
+	{ id: "4", status: FilterStatus.DONE, description: "1 pacote de arroz" },
+];
 
 export function Home() {
 	return (
@@ -35,19 +40,26 @@ export function Home() {
 					data => o item que será renderizado.
 					keyExtractor => funciona como o 'key', sendo usado para trackear o elemento no momento da renderização.
 					renderItem => componente que será renderizado para cada listagem.
+
+					contentContainerStyle => estilização que será aplicada dentro da lista.
+					ItemSeparatorComponent => renderização aplicada para cada item da lista.
+					ListEmptyComponent => renderização quando a lista está vazia.
 				*/}
 				<FlatList
 					data={ITEMS}
-					keyExtractor={(item) => item}
+					keyExtractor={(item) => item.id}
 					renderItem={({ item }) => (
 						<Item
-							data={{
-								description: item,
-								status: FilterStatus.DONE,
-							}}
+							data={item}
 							onRemove={() => console.log("oi")}
 							onStatus={() => console.log("status")}
 						/>
+					)}
+					showsVerticalScrollIndicator={false}
+					ItemSeparatorComponent={() => <View style={styles.separator} />}
+					contentContainerStyle={styles.listContent}
+					ListEmptyComponent={() => (
+						<Text style={styles.emptyList}>Nenhum item adicionado.</Text>
 					)}
 				></FlatList>
 			</View>
