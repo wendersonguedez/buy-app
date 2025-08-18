@@ -10,12 +10,10 @@ type FilterProps = TouchableOpacityProps & {
 };
 
 export function Filter({ status, isActive, ...rest }: FilterProps) {
-	const isActiveOpacity = isActive ? 1 : 0.5;
-
 	return (
 		<TouchableOpacity
-			style={[styles.container, { opacity: isActiveOpacity }]}
-			activeOpacity={0.8}
+			style={[styles.container, { opacity: isActive ? 1 : 0.5 }]}
+			activeOpacity={0.7}
 			{...rest}
 		>
 			<StatusIcon status={status} />

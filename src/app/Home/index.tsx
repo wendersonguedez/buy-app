@@ -7,8 +7,9 @@ import { Filter } from "@/components/Filter";
 
 import { styles } from "./styles";
 import { FilterStatus } from "@/types/FilterStatus";
+import { useState } from "react";
 
-const FILTER_STATUS: FilterStatus[] = [FilterStatus.DONE, FilterStatus.PENDING];
+const FILTER_STATUS: FilterStatus[] = [FilterStatus.PENDING, FilterStatus.DONE];
 const ITEMS = [
 	{ id: "1", status: FilterStatus.DONE, description: "1 pacote de café" },
 	{ id: "2", status: FilterStatus.PENDING, description: "1 pacote de leite" },
@@ -17,6 +18,8 @@ const ITEMS = [
 ];
 
 export function Home() {
+	const [activeFilter, setActiveFilter] = useState(FilterStatus.PENDING);
+
 	return (
 		<View style={styles.container}>
 			<Image source={require("@/assets/logo.png")} style={styles.logo} />
@@ -29,8 +32,14 @@ export function Home() {
 			<View style={styles.content}>
 				<View style={styles.header}>
 					{FILTER_STATUS.map((status) => (
-						<Filter status={status} isActive key={status} />
+						<Filter
+							key={status}
+							status={status}
+							isActive={status === activeFilter}
+							onPress={() => setActiveFilter(status)}
+						/>
 					))}
+
 					<TouchableOpacity style={styles.clearButton}>
 						<Text style={styles.clearText}>Limpar</Text>
 					</TouchableOpacity>
