@@ -43,6 +43,14 @@ export function Home() {
 
 		await itemsStorage.add(newItem);
 		await itemsByStatus();
+
+		Alert.alert(
+			"Adicionado com sucesso!",
+			`${description} foi adicionado na sua lista de compras.`
+		);
+
+		setActiveFilter(FilterStatus.PENDING);
+		setDescription("");
 	}
 
 	async function itemsByStatus() {
@@ -67,6 +75,7 @@ export function Home() {
 				<Input
 					placeholder="O que você precisa comprar?"
 					onChangeText={setDescription}
+					value={description}
 				/>
 				<Button title="Adicionar" onPress={handleAdd} />
 			</View>
