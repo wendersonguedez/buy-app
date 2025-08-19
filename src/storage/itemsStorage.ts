@@ -27,6 +27,10 @@ async function getByStatus(status: FilterStatus): Promise<ItemStorage[]> {
 	return items.filter((item) => item.status === status);
 }
 
+/**
+ * Função auxiliar do método add(), onde ela fica responsável por salvar o item no aparelho
+ * do usuário.
+ */
 async function save(items: ItemStorage[]): Promise<void> {
 	try {
 		await AsyncStorage.setItem(ITEMS_STORAGE_KEY, JSON.stringify(items));
@@ -35,6 +39,11 @@ async function save(items: ItemStorage[]): Promise<void> {
 	}
 }
 
+/**
+ * Função principal em relação ao método save(), onde recebe o item com as
+ * informações digitadas pelo usuário e envia para que possam ser salvas
+ * no aparelho.
+ */
 async function add(newItem: ItemStorage): Promise<ItemStorage[]> {
 	const items = await get();
 	const updatedItems = [...items, newItem];
