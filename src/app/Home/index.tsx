@@ -1,4 +1,11 @@
-import { View, Image, TouchableOpacity, Text, FlatList } from "react-native";
+import {
+	View,
+	Image,
+	TouchableOpacity,
+	Text,
+	FlatList,
+	Alert,
+} from "react-native";
 
 import { Button } from "@/components/Button";
 import { Input } from "@/components/Input";
@@ -20,6 +27,21 @@ const ITEMS = [
 export function Home() {
 	const [activeFilter, setActiveFilter] = useState(FilterStatus.PENDING);
 	const [description, setDescription] = useState("");
+	const [items, setItems] = useState<any>([]);
+
+	function handleAdd() {
+		if (!description.trim()) {
+			Alert.alert("Adicionar", "Informe o que você precisa comprar.");
+		}
+
+		const newItem = {
+			id: Math.random().toString(36).substring(2),
+			description,
+			status: FilterStatus.PENDING,
+		};
+
+		setItems((prevState) => [...prevState, newItem]);
+	}
 
 	return (
 		<View style={styles.container}>
@@ -30,7 +52,7 @@ export function Home() {
 					placeholder="O que você precisa comprar?"
 					onChangeText={setDescription}
 				/>
-				<Button title="Entrar" />
+				<Button title="Adicionar" onPress={handleAdd} />
 			</View>
 
 			<View style={styles.content}>
@@ -59,7 +81,7 @@ export function Home() {
 					ListEmptyComponent => renderização quando a lista está vazia.
 				*/}
 				<FlatList
-					data={ITEMS}
+					data={items}
 					keyExtractor={(item) => item.id}
 					renderItem={({ item }) => (
 						<Item
