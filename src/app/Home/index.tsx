@@ -63,6 +63,16 @@ export function Home() {
 		}
 	}
 
+	async function handleRemove(id: string) {
+		try {
+			await itemsStorage.remove(id);
+			await itemsByStatus();
+		} catch (error) {
+			console.log(error);
+			Alert.alert("Remover", "Não foi possível remover.");
+		}
+	}
+
 	useEffect(() => {
 		itemsByStatus();
 	}, [activeFilter]);
@@ -111,8 +121,8 @@ export function Home() {
 					renderItem={({ item }) => (
 						<Item
 							data={item}
-							onRemove={() => console.log("oi")}
 							onStatus={() => console.log("status")}
+							onRemove={() => handleRemove(item.id)}
 						/>
 					)}
 					showsVerticalScrollIndicator={false}
