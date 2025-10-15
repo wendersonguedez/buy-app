@@ -15,7 +15,8 @@ import { Filter } from "@/components/Filter";
 
 import { styles } from "./styles";
 import { FilterStatus } from "@/types/FilterStatus";
-import { itemsStorage, ItemStorage } from "@/storage/itemsStorage";
+import { ItemStorage } from "@/types/ItemStorage";
+import { itemsStorage } from "@/storage/itemsStorage";
 
 const FILTER_STATUS: FilterStatus[] = [FilterStatus.PENDING, FilterStatus.DONE];
 const ITEMS = [

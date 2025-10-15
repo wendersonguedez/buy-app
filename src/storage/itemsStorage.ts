@@ -1,13 +1,8 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { FilterStatus } from "@/types/FilterStatus";
+import { ItemStorage } from "@/types/ItemStorage";
 
 const ITEMS_STORAGE_KEY = "@buy:items";
-
-export type ItemStorage = {
-	id: string;
-	status: FilterStatus;
-	description: string;
-};
 
 async function get(): Promise<ItemStorage[]> {
 	try {
