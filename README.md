@@ -71,7 +71,7 @@ Para rodar este projeto em seu ambiente local, siga os passos abaixo.
 
 ## 📬 Contato
 
-**Wendersson Guedes**
+**Wenderson Guedes**
 
 - GitHub: [@wendersonguedez](https://github.com/wendersonguedez)
 - LinkedIn: [@wendersonguedes](https://www.linkedin.com/in/wendersonguedes/)
